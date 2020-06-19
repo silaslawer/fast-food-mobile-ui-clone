@@ -12,4 +12,6 @@ class UIColors {
   static const grey = Color(0xFFBDBDBD);
   static const lightGrey = Color(0xFFFAFAFA);
   static const lightGrey1 = Color(0xFFEEF1F0);
+  static const red = Color(0xFFFF3232);
+  static const green = Color(0xFF7A9D7E);
 }
