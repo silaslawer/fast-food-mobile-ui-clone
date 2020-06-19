@@ -31,8 +31,8 @@ class _DashboardState extends State<Dashboard> {
       body: pages[currentIndex],
       extendBody: true,
       bottomNavigationBar: Container(
-        padding: EdgeInsets.all(10),
-        height: height / 8,
+        padding: EdgeInsets.all(0),
+        height: height / 10,
 
         decoration: BoxDecoration(
           color: Theme.of(context).bottomAppBarColor,
@@ -65,15 +65,14 @@ class _DashboardState extends State<Dashboard> {
                       IconButton(
                         icon: Image.asset(
                           icon["icon"].toString(),
-
-                          fit: BoxFit.cover,
+                          fit: BoxFit.contain,
                           color: color,
                         ),
                         onPressed: () => setState(() => currentIndex = i),
                       ),
                       Text(
                         icon["text"].toString(),
-                        style: TextStyle(color: color),
+                        style: TextStyle(color: color,fontSize: 10,fontWeight: FontWeight.w600),
                       ),
                     ],
                   );

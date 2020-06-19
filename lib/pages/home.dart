@@ -80,7 +80,7 @@ class _HomeState extends State<Home> {
         children: <Widget>[
           Container(
             padding: EdgeInsets.symmetric(horizontal: 10),
-            margin: EdgeInsets.symmetric(vertical: 40),
+            margin: EdgeInsets.symmetric(vertical: 30),
             child: Row(
               children: <Widget>[
                 Expanded(
@@ -90,22 +90,22 @@ class _HomeState extends State<Home> {
                       Text(
                         "Find Your Best choice",
                         style:
-                            TextStyle(color: UIColors.lightBlack, fontSize: 20),
+                            TextStyle(color: UIColors.lightBlack, fontSize: 15),
                       ),
                       SizedBox(height: 5),
                       Text(
                         "Nutrition Meal",
                         style: TextStyle(
                             color: UIColors.black,
-                            fontSize: 35,
+                            fontSize: 30,
                             fontWeight: FontWeight.bold),
                       )
                     ],
                   ),
                 ),
                 Container(
-                  width: 70,
-                  height: 70,
+                  width: 50,
+                  height: 50,
                   decoration: BoxDecoration(
                       borderRadius: BorderRadius.all(
                         Radius.circular(10),
@@ -121,6 +121,7 @@ class _HomeState extends State<Home> {
           ),
           Container(
             padding: EdgeInsets.symmetric(horizontal: 10),
+            height: 50,
             child: TextField(
               style: TextStyle(),
               decoration: InputDecoration(
@@ -128,7 +129,7 @@ class _HomeState extends State<Home> {
                       icon: Icon(
                         Icons.search,
                         color: UIColors.lightBlack,
-                        size: 30,
+                        size: 25,
                       ),
                       onPressed: () {}),
                   filled: true,
@@ -145,30 +146,24 @@ class _HomeState extends State<Home> {
                   hintStyle: TextStyle(color: UIColors.lightBlack)),
             ),
           ),
-          SizedBox(height: 20),
           Container(
             width: double.infinity,
-            margin: EdgeInsets.only(top: 15, bottom: 10),
+            margin: EdgeInsets.only(top: 20, bottom: 10),
             alignment: Alignment.topLeft,
-            child: SingleChildScrollView(
-              padding: EdgeInsets.symmetric(horizontal: 24),
-              scrollDirection: Axis.horizontal,
-              child: Row(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: <Widget>[
-                  ...categories.map((c) => categoryCard(context, c)).toList(),
-                ],
-              ),
+            child: Row(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: <Widget>[
+                ...categories.map((c) => Expanded(child: categoryCard(context, c))).toList(),
+              ],
             ),
           ),
-          SizedBox(height: 20),
           Container(
             height: 500,
             width: double.infinity,
             margin: EdgeInsets.only(top: 15, bottom: 10),
             alignment: Alignment.topLeft,
             child: SingleChildScrollView(
-              padding: EdgeInsets.symmetric(horizontal: 24),
+              padding: EdgeInsets.symmetric(horizontal: 10),
               scrollDirection: Axis.horizontal,
               child: Row(
                 crossAxisAlignment: CrossAxisAlignment.start,
@@ -192,19 +187,19 @@ class _HomeState extends State<Home> {
         crossAxisAlignment: CrossAxisAlignment.center,
         children: <Widget>[
           Container(
-            width: 120,
-            height: 150,
+            width: 90,
+            height: 110,
             alignment: Alignment.topCenter,
             margin: EdgeInsets.only(right: 7.5, left: 7.5),
             decoration: BoxDecoration(
               color: category.accentColor,
               borderRadius: BorderRadius.all(
-                Radius.circular(16),
+                Radius.circular(8),
               ),
             ),
             child: Center(
               child: Image.asset(
-                category.poster,
+                category.poster,fit: BoxFit.contain,
               ),
             ),
           ),
@@ -214,6 +209,7 @@ class _HomeState extends State<Home> {
           Center(
               child: Text(
             category.title,
+            style: TextStyle(fontWeight: FontWeight.w600),
             textAlign: TextAlign.center,
           ))
         ],
@@ -229,7 +225,7 @@ class _HomeState extends State<Home> {
         child: Container(
           width: 300,
           alignment: Alignment.topCenter,
-          margin: EdgeInsets.only(right: 15),
+          margin: EdgeInsets.only(right: 10),
           padding: EdgeInsets.fromLTRB(0, 5, 0, 0),
           child: Stack(children: <Widget>[
             Container(
