@@ -80,14 +80,20 @@ class _FoodDetailsState extends State<FoodDetails> {
               Positioned(
                   top: 10,
                   left: 10,
-                  child: Container(
+                  child: GestureDetector(
+                    onTap: () => Navigator.pop(context),
+                    child: Container(
                       width: 50,
                       height: 50,
                       decoration: BoxDecoration(
                           borderRadius: BorderRadius.all(
                             Radius.circular(10),
                           ),
-                          color: UIColors.white))),
+                          image: DecorationImage(
+                              image: AssetImage("images/icons/back.png")),
+                          color: UIColors.white),
+                    ),
+                  )),
               Positioned(
                   top: 10,
                   right: 10,
@@ -98,6 +104,8 @@ class _FoodDetailsState extends State<FoodDetails> {
                           borderRadius: BorderRadius.all(
                             Radius.circular(10),
                           ),
+                          image: DecorationImage(
+                              image: AssetImage("images/icons/camera.png")),
                           color: UIColors.white)))
             ],
           ),
