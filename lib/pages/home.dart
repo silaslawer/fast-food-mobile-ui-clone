@@ -1,5 +1,6 @@
 import 'package:fastfoodmobile/models/category.dart';
 import 'package:fastfoodmobile/models/food.dart';
+import 'package:fastfoodmobile/pages/food_details.dart';
 import 'package:fastfoodmobile/util/colors.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/cupertino.dart';
@@ -10,9 +11,6 @@ class Home extends StatefulWidget {
 }
 
 class _HomeState extends State<Home> {
-  double moviesOpacity = 0;
-  double seriesOpacity = 0;
-  final fadeDuration = Duration(milliseconds: 200);
   List<Category> categories = [
     Category(
         title: 'DAIRY',
@@ -32,6 +30,19 @@ class _HomeState extends State<Home> {
         accentColor: UIColors.lightPink)
   ];
 
+
+  List<Category> foodCategoryTags = [
+    Category(
+        title: 'Milk',
+        accentColor: UIColors.yellow),
+    Category(
+        title: 'Bread',
+        accentColor: UIColors.pink),
+    Category(
+        title: 'Juice',
+        accentColor: UIColors.green.withOpacity(0.5)),
+  ];
+
   List<Food> foods = [
     Food(
         name: 'Morning Breakfast',
@@ -48,27 +59,19 @@ class _HomeState extends State<Home> {
         price: 45.00),
 
     Food(
-        name: 'Morning Breakfast',
+        name: 'Supper Food',
         image: 'images/foods/supper.png',
         description:
         "Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.",
         price: 20.00),
   ];
 
-  @override
-  void initState() {
-    super.initState();
-    Future.delayed(Duration(milliseconds: 600), () async {
-      fadeInWidgets();
-    });
-  }
+    @override
+    void initState() {
+      super.initState();
 
-  void fadeInWidgets() async {
-    await Future.delayed(Duration(milliseconds: 400));
-    if (mounted) setState(() => moviesOpacity = 1);
-    await Future.delayed(Duration(milliseconds: 400));
-    if (mounted) setState(() => seriesOpacity = 1);
-  }
+    }
+
 
   @override
   Widget build(BuildContext context) {
@@ -160,7 +163,7 @@ class _HomeState extends State<Home> {
           ),
           SizedBox(height: 20),
           Container(
-            height: 450,
+            height: 500,
             width: double.infinity,
             margin: EdgeInsets.only(top: 15, bottom: 10),
             alignment: Alignment.topLeft,
@@ -176,6 +179,7 @@ class _HomeState extends State<Home> {
               ),
             ),
           ),
+          SizedBox(height: 20),
         ],
       ),
     );
@@ -220,6 +224,7 @@ class _HomeState extends State<Home> {
   Widget foodCard(BuildContext context, Food food) {
     return GestureDetector(
         onTap: () {
+         Navigator.push(context, CupertinoPageRoute(builder: (context) => FoodDetails(food)));
         },
         child: Container(
           width: 300,
@@ -246,78 +251,88 @@ class _HomeState extends State<Home> {
             ),
             Container(
               padding: EdgeInsets.only(
-                  top: 250.0, left: 20.0, right: 20.0, bottom: 10.0),
+                  top: 300.0, left: 10.0, right: 10.0, bottom: 30.0),
               child: Material(
                 shape: RoundedRectangleBorder(
                     borderRadius: BorderRadius.circular(10.0)),
                 elevation: 5.0,
                 color: Colors.white,
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: <Widget>[
-                    SizedBox(
-                      height: 15.0,
-                    ),
-                    Text(
-                      food.name,
-                      style: Theme.of(context).textTheme.title,
-                    ),
-                    SizedBox(
-                      height: 5.0,
-                    ),
-                    Text("UI/UX designer | Foodie | Kathmandu"),
-                    SizedBox(
-                      height: 16.0,
-                    ),
-                    Container(
-                      height: 40.0,
-                      child: Row(
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        children: <Widget>[
-                          Expanded(
-                            child: ListTile(
-                              title: Text(
-                                "302",
-                                textAlign: TextAlign.center,
-                                style: TextStyle(fontWeight: FontWeight.bold),
-                              ),
-                              subtitle: Text("Posts".toUpperCase(),
-                                  textAlign: TextAlign.center,
-                                  style: TextStyle(fontSize: 12.0)),
-                            ),
-                          ),
-                          Expanded(
-                            child: ListTile(
-                              title: Text(
-                                "10.3K",
-                                textAlign: TextAlign.center,
-                                style: TextStyle(fontWeight: FontWeight.bold),
-                              ),
-                              subtitle: Text("Followers".toUpperCase(),
-                                  textAlign: TextAlign.center,
-                                  style: TextStyle(fontSize: 12.0)),
-                            ),
-                          ),
-                          Expanded(
-                            child: ListTile(
-                              title: Text(
-                                "120",
-                                textAlign: TextAlign.center,
-                                style: TextStyle(fontWeight: FontWeight.bold),
-                              ),
-                              subtitle: Text("Following".toUpperCase(),
-                                  textAlign: TextAlign.center,
-                                  style: TextStyle(fontSize: 12.0)),
-                            ),
-                          ),
-                        ],
+                child: Container(padding: EdgeInsets.all(8),
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: <Widget>[
+                      SizedBox(
+                        height: 15.0,
                       ),
-                    )
-                  ],
+                      Text(
+                        food.name,
+                        style: TextStyle(color: UIColors.black,fontWeight: FontWeight.w600,fontSize: 22),
+                      ),
+                      SizedBox(
+                        height: 5.0,
+                      ),
+                      Text("\$\ ${food.price}",style: TextStyle(color: UIColors.red,fontWeight: FontWeight.w600,fontSize: 17),),
+                      SizedBox(
+                        height: 5.0,
+                      ),
+                      Container(
+                        child: Row(
+                          children: <Widget>[
+                         Icon(Icons.star,color: UIColors.red,),
+                         Icon(Icons.star,color: UIColors.red,),
+                         Icon(Icons.star,color: UIColors.red,),
+                         Icon(Icons.star,color: UIColors.red,),
+                         Icon(Icons.star,color: UIColors.grey,),
+                          ],
+                        ),
+                      ),
+                    Container(
+                        width: double.infinity,
+                        margin: EdgeInsets.only(top: 15),
+                        alignment: Alignment.topLeft,
+                        child: SingleChildScrollView(
+                          scrollDirection: Axis.horizontal,
+                          child: Row(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: <Widget>[
+                              ...foodCategoryTags.map((c) => foodCategoryChip(context, c)).toList(),
+                            ],
+                          ),
+                        ),)
+                    ],
+                  ),
                 ),
               ),
             ),
           ]),
         ));
+  }
+
+  Widget foodCategoryChip(BuildContext context, Category category) {
+    return GestureDetector(
+      onTap: () {},
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.center,
+        children: <Widget>[
+          Container(
+            padding: EdgeInsets.all(8),
+            alignment: Alignment.topCenter,
+            width: 80,
+            margin: EdgeInsets.only(right: 7.5, ),
+            decoration: BoxDecoration(
+              color: category.accentColor,
+              borderRadius: BorderRadius.all(
+                Radius.circular(16),
+              ),
+            ),
+            child: Center(
+              child: Text(
+                category.title,style: TextStyle(fontWeight: FontWeight.w600),
+              ),
+            ),
+          ),
+        ],
+      ),
+    );
   }
 }
